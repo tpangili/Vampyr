@@ -32,12 +32,12 @@ let config = {
 // create game object
 let game = new Phaser.Game(config);
 // reserve keyboard names
-let keySpace, keyH, keyC, keyM, key1, key2, key3;
+let keySpace, keyC, keyM, key1, key2, key3;
 // miscellaneous variables for future scenes
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
 let w = game.config.width;
 let h = game.config.height;
-const playerWidth = 48;
-const playerHeight = 48;
+const playerWidth = 32;
+const playerHeight = 32;
 let cursors;

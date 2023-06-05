@@ -9,7 +9,7 @@ class Menu extends Phaser.Scene {
 
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Georgia',
+            fontFamily: 'Courier',
             fontSize: '40px',
             color: '#FFFFFF',
             stroke: '#FFFFFF',
@@ -29,7 +29,9 @@ class Menu extends Phaser.Scene {
 
         // define keys
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
+        key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         /*
@@ -48,15 +50,15 @@ class Menu extends Phaser.Scene {
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyC)) {
+        if (Phaser.Input.Keyboard.JustDown(key1)) {
             // starts scene 1
             //this.scene.start('firstScene'); 
         }
-        if (Phaser.Input.Keyboard.JustDown(keyC)) {
+        if (Phaser.Input.Keyboard.JustDown(key2)) {
             // starts scene 2
             //this.scene.start('secondScene'); 
         }
-        if (Phaser.Input.Keyboard.JustDown(keyC)) {
+        if (Phaser.Input.Keyboard.JustDown(key3)) {
             // starts scene 3
             //this.scene.start('thirdScene'); 
         }
