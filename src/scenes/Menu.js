@@ -5,10 +5,7 @@ class Menu extends Phaser.Scene {
 
     create() {
         // Adds tile sprite for the title screen
-        this.title_screen = this.add.tileSprite(0, 0, 640, 780, 'title').setOrigin(0, 0);
-
-        // checks if player has pressed start
-        this.start = false;
+        //this.title_screen = this.add.tileSprite(0, 0, 640, 640, 'title').setOrigin(0, 0);
 
         // menu text configuration
         let menuConfig = {
@@ -35,6 +32,7 @@ class Menu extends Phaser.Scene {
         keyH = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.H);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
+        /*
         // menu background music
         this.music = this.sound.add('bgm_menu');
         let musicConfig = {
@@ -46,23 +44,23 @@ class Menu extends Phaser.Scene {
             loop: true,
             delay: 0
         }
-        this.music.play(musicConfig);
+        this.music.play(musicConfig);*/
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(key1) && !this.start) {
+        if (Phaser.Input.Keyboard.JustDown(keyC)) {
             // starts scene 1
             //this.scene.start('firstScene'); 
         }
-        if (Phaser.Input.Keyboard.JustDown(key2) && !this.start) {
+        if (Phaser.Input.Keyboard.JustDown(keyC)) {
             // starts scene 2
             //this.scene.start('secondScene'); 
         }
-        if (Phaser.Input.Keyboard.JustDown(key3) && !this.start) {
+        if (Phaser.Input.Keyboard.JustDown(keyC)) {
             // starts scene 3
             //this.scene.start('thirdScene'); 
         }
-        if (Phaser.Input.Keyboard.JustDown(keyC) && !this.start) {
+        if (Phaser.Input.Keyboard.JustDown(keyC)) {
             // Display credits
             //this.scene.start('creditsScene');
         }

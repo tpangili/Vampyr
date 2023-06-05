@@ -1,13 +1,12 @@
 // Thurmann Pangilinan
-// Vampyr
-// project
+// Movie Adapted: Vampyr
 
 // more strict about accuracy
 'use strict';
 
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
+    width: 780,
     height: 780,
     fps: {
         target: 60,
@@ -27,13 +26,13 @@ let config = {
             fps: 60
         }
     },
-    scene: [ Load, Menu, Scene1, Scene2, Scene3, Credits ]
+    scene: [ Load, Menu ]
 }
 
 // create game object
 let game = new Phaser.Game(config);
 // reserve keyboard names
-let keySpace, keyH, keyC, keyM, keyA, keyD;
+let keySpace, keyH, keyC, keyM, key1, key2, key3;
 // miscellaneous variables for future scenes
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;
