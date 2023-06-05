@@ -6,8 +6,8 @@
 
 let config = {
     type: Phaser.CANVAS,
-    width: 780,
-    height: 780,
+    width: 768,
+    height: 768,
     fps: {
         target: 60,
         forceSetTimeOut: false
