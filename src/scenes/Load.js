@@ -15,22 +15,9 @@ class Load extends Phaser.Scene {
             loadingBar.destroy();
         });
 
-        // menu text configuration
-        let menuConfig = {
-            fontFamily: 'Georgia',
-            fontSize: '30px',
-            color: '#FFFFFF',
-            stroke: '#FFFFFF',
-            strokeThickness: 1,
-            align: 'center',
-            padding: {
-                top: 5,
-                bottom: 5
-            }
-        }
-
         this.load.path = './assets/';
         // load graphics assets
+        this.load.image('title', 'img/title_screen.png');
         // load texture atlases
         // load audio assets
     }
