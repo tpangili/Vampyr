@@ -26,7 +26,8 @@ let config = {
             fps: 60
         }
     },
-    scene: [ Load, Menu ]
+    zoom: 2,
+    scene: [ Load, Menu, Scene1 ]
 }
 
 // create game object
