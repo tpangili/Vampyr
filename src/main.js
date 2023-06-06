@@ -26,7 +26,6 @@ let config = {
             fps: 60
         }
     },
-    zoom: 2,
     scene: [ Load, Menu, Scene1 ]
 }
 

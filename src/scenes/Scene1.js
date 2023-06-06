@@ -2,7 +2,7 @@ class Scene1 extends Phaser.Scene {
     constructor() {
         super("firstScene");
 
-        //this.VEL = 175;
+        this.VEL = 175;
     }
 
     preload() {
@@ -16,7 +16,7 @@ class Scene1 extends Phaser.Scene {
     create() {
         // setup tilemap
         const map = this.add.tilemap("scene1_JSON");
-        const tileset = map.addTilesetImage("colored_packed", "1bit_tiles");
+        const tileset = map.addTilesetImage("vampyr atari tileset", "tilesetImage");
         const bgLayer = map.createLayer("bgLayer", tileset, 0, 0);
         const collisionLayer = map.createLayer("collisionLayer", tileset, 0, 0);
 
@@ -32,7 +32,7 @@ class Scene1 extends Phaser.Scene {
         // });
 
         // create player with physics properties
-        this.p1 = new Player (this, centerX*3, centerY*3, 'player');
+        this.p1 = this.physics.add.sprite(centerX*3, centerY*3, 'player');
         this.p1.body.setCollideWorldBounds(true);
 
         // set camera properties
@@ -68,6 +68,7 @@ class Scene1 extends Phaser.Scene {
         // player movement
         this.p1.body.setVelocity(0);
 
+        
         if(cursors.left.isDown) {
             this.p1.body.setVelocityX(-this.VEL);
         } 
@@ -86,11 +87,11 @@ class Scene1 extends Phaser.Scene {
             this.scene.restart();
         }
         if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-            this.scene.start("slideshowScene");
+            //this.scene.start("slideshowScene");
         }
 
         // debug text
-        this.debug.text = `CAMSCROLLX:${this.cam.scrollX.toFixed(2)}, CAMSCROLLY:${this.cam.scrollY.toFixed(2)}\nPX:${this.p1.x.toFixed(2)}, PY:${this.p1.y.toFixed(2)}`;
+        //this.debug.text = `CAMSCROLLX:${this.cam.scrollX.toFixed(2)}, CAMSCROLLY:${this.cam.scrollY.toFixed(2)}\nPX:${this.p1.x.toFixed(2)}, PY:${this.p1.y.toFixed(2)}`;
     }
 
     // check passed obj against passed camera bounds to scroll camera
