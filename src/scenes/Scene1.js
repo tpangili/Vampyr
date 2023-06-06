@@ -32,7 +32,7 @@ class Scene1 extends Phaser.Scene {
         // });
 
         // create player with physics properties
-        this.p1 = this.physics.add.sprite(centerX*3, centerY*3, 'player');
+        this.p1 = this.physics.add.sprite(385, 3000, 'player');
         this.p1.body.setCollideWorldBounds(true);
 
         // set camera properties
@@ -64,6 +64,9 @@ class Scene1 extends Phaser.Scene {
     update() {
         // check player against camera bounds (in case we need to scroll)
         this.checkCamBounds(this.p1, this.cam);
+
+        console.log(this.p1.x);
+        console.log(this.p1.y);
 
         // player movement
         this.p1.body.setVelocity(0);
