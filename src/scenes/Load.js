@@ -20,6 +20,7 @@ class Load extends Phaser.Scene {
         this.load.image('title', 'img/title_screen.png');
         // load texture atlases
         // load audio assets
+        this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');
     }
 
     create() {

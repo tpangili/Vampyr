@@ -26,7 +26,7 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX - 180, centerY + 150, 'Press (1) to play Scene 1', menuConfig);
         this.add.text(centerX - 180, centerY + 200, 'Press (2) to play Scene 2', menuConfig);
         this.add.text(centerX - 180, centerY + 250, 'Press (3) to play Scene 3', menuConfig);
-        this.add.text(centerX - 180, centerY + 315, '(C) for credits', menuConfig);
+        this.add.text(centerX - 110, centerY + 315, '(C) for credits', menuConfig);
 
         // define keys
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -34,8 +34,7 @@ class Menu extends Phaser.Scene {
         key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
         key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
-
-        /*
+  
         // menu background music
         this.music = this.sound.add('bgm_menu');
         let musicConfig = {
@@ -47,12 +46,13 @@ class Menu extends Phaser.Scene {
             loop: true,
             delay: 0
         }
-        this.music.play(musicConfig);*/
+        this.music.play(musicConfig);
     }
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(key1)) {
             // starts scene 1
+            this.music.stop();
             this.scene.start('firstScene'); 
         }
         if (Phaser.Input.Keyboard.JustDown(key2)) {
