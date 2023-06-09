@@ -23,6 +23,19 @@ class Scene1 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
+        // background music
+        this.music = this.sound.add('bgm_scene1');
+        let musicConfig = {
+            mute: false,
+            volume: 1,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        }
+        this.music.play(musicConfig);
+
         // controls player movement
         this.endScene = false;
         
@@ -124,12 +137,14 @@ class Scene1 extends Phaser.Scene {
             this.shadow.y = 1050;
             // end of scene has been reached, so return to menu
             this.time.delayedCall(2500, () => { 
+                this.music.stop();
                 this.scene.start("menuScene");
             });
         }
 
         // scene switching / restart
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
+            this.music.stop();
             this.scene.start("menuScene");
         }
 

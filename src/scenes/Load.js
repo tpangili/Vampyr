@@ -26,6 +26,7 @@ class Load extends Phaser.Scene {
         // load texture atlases
         // load audio assets
         this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');
+        this.load.audio('bgm_scene1', 'audio/bgm_scene1.mp3');
     }
 
     create() {
