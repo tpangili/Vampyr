@@ -2,7 +2,7 @@ class Scene1 extends Phaser.Scene {
     constructor() {
         super("firstScene");
 
-        this.VEL = 175;
+        this.VEL = 150;
     }
 
     preload() {
@@ -49,8 +49,7 @@ class Scene1 extends Phaser.Scene {
         // define cursor key input
         cursors = this.input.keyboard.createCursorKeys();
 
-        // enable scene switcher / reload keys
-        this.swap = this.input.keyboard.addKey('S');
+        // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');
 
         // debug text
@@ -65,13 +64,12 @@ class Scene1 extends Phaser.Scene {
         // check player against camera bounds (in case we need to scroll)
         this.checkCamBounds(this.p1, this.cam);
 
-        console.log(this.p1.x);
-        console.log(this.p1.y);
+        //console.log(this.p1.x);
+        //console.log(this.p1.y);
 
         // player movement
         this.p1.body.setVelocity(0);
 
-        
         if(cursors.left.isDown) {
             this.p1.body.setVelocityX(-this.VEL);
         } 
@@ -87,10 +85,7 @@ class Scene1 extends Phaser.Scene {
 
         // scene switching / restart
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
-            this.scene.restart();
-        }
-        if(Phaser.Input.Keyboard.JustDown(this.swap)) {
-            //this.scene.start("slideshowScene");
+            this.scene.start("menuScene");
         }
 
         // debug text

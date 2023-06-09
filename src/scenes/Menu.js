@@ -39,7 +39,7 @@ class Menu extends Phaser.Scene {
         this.music = this.sound.add('bgm_menu');
         let musicConfig = {
             mute: false,
-            volume: 0.5,
+            volume: 1,
             rate: 1,
             detune: 0,
             seek: 0,
