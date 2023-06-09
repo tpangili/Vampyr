@@ -2,15 +2,7 @@ class Scene1 extends Phaser.Scene {
     constructor() {
         super("firstScene");
 
-        this.VEL = 150;
-    }
-
-    preload() {
-        // load assets
-        this.load.path = "./assets/";
-        this.load.image('tilesetImage', 'img/vampyr atari tileset.png');   
-        this.load.tilemapTiledJSON("scene1_JSON", "img/scene1.json");
-        this.load.image('player', 'img/person.png');
+        this.VEL = 145;
     }
 
     create() {
@@ -31,6 +23,14 @@ class Scene1 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
+        // controls shadow movement
+        this.move1 = true;
+        this.move2 = false;
+        this.move3 = false;
+
+        // create shadow object
+        this.shadow = this.physics.add.sprite(385, 1814, 'shadow');
+        
         // create player with physics properties
         this.p1 = this.physics.add.sprite(385, 3000, 'player');
         this.p1.body.setCollideWorldBounds(true);
@@ -81,6 +81,19 @@ class Scene1 extends Phaser.Scene {
         } 
         if(cursors.down.isDown) {
             this.p1.body.setVelocityY(this.VEL);
+        }
+
+        // Has shadow move once player advances enough
+        if (this.p1.y <= 2305 && this.move1 == true) {
+            this.shadow.setVelocityX(150);
+            this.move1 = false;
+            this.move2 = true;
+        }
+        if (this.shadow.x >= 650 && this.move2 == true) {
+            this.shadow.setVelocityX(0);
+            this.shadow.setVelocityY(-150);
+            this.move2 = false;
+            this.move3 = true;
         }
 
         // scene switching / restart
