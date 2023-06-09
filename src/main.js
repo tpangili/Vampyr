@@ -1,5 +1,10 @@
 // Thurmann Pangilinan
 // Movie Adapted: Vampyr
+//
+// Major Phaser Components Used:
+// - Physics system
+// - Camera
+// - Tilemaps
 
 // more strict about accuracy
 'use strict';

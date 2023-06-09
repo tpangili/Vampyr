@@ -23,9 +23,11 @@ class Menu extends Phaser.Scene {
         }
 
         // show menu text
-        this.add.text(centerX - 180, centerY + 150, 'Press (1) to play Scene 1', menuConfig);
-        this.add.text(centerX - 180, centerY + 200, 'Press (2) to play Scene 2', menuConfig);
-        this.add.text(centerX - 180, centerY + 250, 'Press (3) to play Scene 3', menuConfig);
+        this.add.text(centerX - 250, centerY + 80, 'Controls: Use the arrow keys to move', menuConfig);
+        this.add.text(centerX - 250, centerY + 110, 'and press R to return to the menu.', menuConfig);
+        this.add.text(centerX - 180, centerY + 160, 'Press (1) to play Scene 1', menuConfig);
+        this.add.text(centerX - 180, centerY + 210, 'Press (2) to play Scene 2', menuConfig);
+        this.add.text(centerX - 180, centerY + 260, 'Press (3) to play Scene 3', menuConfig);
         this.add.text(centerX - 110, centerY + 315, '(C) for credits', menuConfig);
 
         // define keys

@@ -23,10 +23,14 @@ class Scene1 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
+        // controls player movement
+        this.endScene = false;
+        
         // controls shadow movement
         this.move1 = true;
         this.move2 = false;
         this.move3 = false;
+        this.move4 = false;
 
         // create shadow object
         this.shadow = this.physics.add.sprite(385, 1814, 'shadow');
@@ -34,6 +38,9 @@ class Scene1 extends Phaser.Scene {
         // create player with physics properties
         this.p1 = this.physics.add.sprite(385, 3000, 'player');
         this.p1.body.setCollideWorldBounds(true);
+
+        // create person sprite
+        this.person = this.add.image(940, 1087, 'player');
 
         // set camera properties
         this.cam = this.cameras.main;
@@ -64,22 +71,23 @@ class Scene1 extends Phaser.Scene {
         // check player against camera bounds (in case we need to scroll)
         this.checkCamBounds(this.p1, this.cam);
 
+        // Debug logs to see player position
         //console.log(this.p1.x);
         //console.log(this.p1.y);
 
         // player movement
         this.p1.body.setVelocity(0);
 
-        if(cursors.left.isDown) {
+        if(cursors.left.isDown && !this.endScene) {
             this.p1.body.setVelocityX(-this.VEL);
         } 
-        if(cursors.right.isDown) {
+        if(cursors.right.isDown && !this.endScene) {
             this.p1.body.setVelocityX(this.VEL);
         } 
-        if(cursors.up.isDown) {
+        if(cursors.up.isDown && !this.endScene) {
             this.p1.body.setVelocityY(-this.VEL);
         } 
-        if(cursors.down.isDown) {
+        if(cursors.down.isDown && !this.endScene) {
             this.p1.body.setVelocityY(this.VEL);
         }
 
@@ -94,6 +102,30 @@ class Scene1 extends Phaser.Scene {
             this.shadow.setVelocityY(-150);
             this.move2 = false;
             this.move3 = true;
+        }
+        if (this.shadow.y <= 1565 && this.move3 == true) {
+            this.shadow.setVelocityX(0);
+            this.shadow.setVelocityY(0);
+            this.shadow.x = 1386;
+            this.shadow.y = 1087;
+            this.move3 = false;
+            this.move4 = true;
+        }
+        if (this.p1.y <= 1565 && this.move4 == true) {
+            this.endScene = true;
+            this.p1.setVelocityX(0);
+            this.p1.setVelocityY(0);
+            this.shadow.setVelocityX(-150);
+        }
+        if (this.shadow.x <= 990 && this.move4 == true) {
+            this.shadow.setVelocityX(0);
+            this.shadow.setVelocityY(0);
+            this.shadow.x = 990;
+            this.shadow.y = 1050;
+            // end of scene has been reached, so return to menu
+            this.time.delayedCall(2500, () => { 
+                this.scene.start("menuScene");
+            });
         }
 
         // scene switching / restart
