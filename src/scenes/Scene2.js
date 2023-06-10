@@ -23,10 +23,9 @@ class Scene2 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
-        /*
         // background music
         this.music = this.sound.add('bgm_scene2');
-        let musicConfig = {
+        let musicConfig2 = {
             mute: false,
             volume: 1,
             rate: 1,
@@ -35,7 +34,7 @@ class Scene2 extends Phaser.Scene {
             loop: true,
             delay: 0
         }
-        this.music.play(musicConfig);*/
+        this.music.play(musicConfig2);
 
         // controls player movement
         this.endScene = false;
@@ -83,8 +82,8 @@ class Scene2 extends Phaser.Scene {
         this.checkCamBounds(this.p1, this.cam);
 
         // Debug logs to see player position
-        console.log(this.p1.x);
-        console.log(this.p1.y);
+        //console.log(this.p1.x);
+        //console.log(this.p1.y);
 
         // player movement
         this.p1.body.setVelocity(0);
@@ -104,7 +103,7 @@ class Scene2 extends Phaser.Scene {
 
         // scene switching / restart
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
-            //this.music.stop();
+            this.music.stop();
             this.scene.start("menuScene");
         }
 
