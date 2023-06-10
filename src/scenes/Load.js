@@ -23,6 +23,7 @@ class Load extends Phaser.Scene {
         // load tileset assets
         this.load.image('tilesetImage', 'img/vampyr atari tileset.png');   
         this.load.tilemapTiledJSON("scene1_JSON", "img/scene1.json");
+        this.load.tilemapTiledJSON("scene2_JSON", "img/scene2.json");
         // load texture atlases
         // load audio assets
         this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');

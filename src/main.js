@@ -5,6 +5,8 @@
 // - Physics system
 // - Camera
 // - Tilemaps
+// - Timer
+// - Text Object
 
 // more strict about accuracy
 'use strict';
@@ -31,7 +33,7 @@ let config = {
             fps: 60
         }
     },
-    scene: [ Load, Menu, Scene1 ]
+    scene: [ Load, Menu, Scene1, Scene2 ]
 }
 
 // create game object
