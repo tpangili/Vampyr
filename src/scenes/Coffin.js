@@ -5,6 +5,20 @@ class Coffin extends Phaser.Scene {
         this.VEL = 145;
     }
 
+    preload() {
+        // coffin window animation config
+        this.anims.create({
+            key: 'clouds',
+            frameRate: 12,
+            repeat: -1,
+            frames: this.anims.generateFrameNames('window_atlas', {
+                prefix: 'clouds_',
+                start: 0,
+                end: 5
+            })
+        })
+    }
+
     create() {
         // setup tilemap
         this.map = this.add.tilemap("coffin_JSON");
@@ -60,6 +74,32 @@ class Coffin extends Phaser.Scene {
         // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');
 
+        // add sprite for coffin window animation
+        this.window = this.add.sprite(0, 0, 'window_atlas', 'clouds_0').setOrigin(0, 0);
+        this.window.alpha = 0;
+
+        // makes animation visible every 15 seconds
+        this.time.delayedCall(15000, () => { 
+            this.window.alpha = 1;
+        });
+        this.time.delayedCall(25000, () => { 
+            this.window.alpha = 0;
+        });
+        this.time.delayedCall(40000, () => { 
+            this.window.alpha = 1;
+        });
+        this.time.delayedCall(50000, () => { 
+            this.window.alpha = 0;
+        });
+        this.time.delayedCall(65000, () => { 
+            this.window.alpha = 1;
+        });
+        // ends scene
+        this.time.delayedCall(75000, () => { 
+            this.music.stop();
+            this.scene.start("endScene");
+        });
+
         // debug text
         //this.debug = this.add.bitmapText(16, h-48, 'gem', '', 12);
         //this.debug.setScrollFactor(0); 
@@ -75,6 +115,9 @@ class Coffin extends Phaser.Scene {
         // Debug logs to see player position
         //console.log(`X: ${this.p1.x}`);
         //console.log(`Y: ${this.p1.y}`);
+
+        // plays window animation
+        this.window.play('clouds', true);
 
         // player movement
         this.p1.body.setVelocity(0);
@@ -92,12 +135,7 @@ class Coffin extends Phaser.Scene {
             this.p1.body.setVelocityY(this.VEL);
         }
 
-        if (this.p1.body.x >= 2310) {
-            this.music.stop();
-            this.scene.start("endScene");
-        }
-
-        // scene switching / restart
+        // return to menu
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
             this.music.stop();
             this.scene.start("menuScene");

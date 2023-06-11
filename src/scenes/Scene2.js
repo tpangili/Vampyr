@@ -168,7 +168,7 @@ class Scene2 extends Phaser.Scene {
             this.p1.body.setVelocityY(this.VEL);
         }
 
-        // scene switching / restart
+        // return to menu
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
             this.music.stop();
             this.scene.start("menuScene");
@@ -189,7 +189,7 @@ class Scene2 extends Phaser.Scene {
         this.vamp.x = obj.x;
         this.vamp.y = obj.y;
         this.vamp.alpha = 1;
-        // show score text
+        // vamp color border
         this.add.image(0, 0, 'vampColor').setOrigin(0, 0);
         this.endScene = true;
         this.vampTime = true;

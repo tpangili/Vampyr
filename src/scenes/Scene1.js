@@ -142,7 +142,7 @@ class Scene1 extends Phaser.Scene {
             });
         }
 
-        // scene switching / restart
+        // return to menu
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
             this.music.stop();
             this.scene.start("menuScene");

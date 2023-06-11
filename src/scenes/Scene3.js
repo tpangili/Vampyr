@@ -104,12 +104,12 @@ class Scene3 extends Phaser.Scene {
             this.p2.body.setVelocityY(this.VEL);
         }
 
-        if (this.p1.body.x >= 2310) {
+        if (this.p1.body.x >= 2300) {
             this.music.stop();
             this.scene.start("coffinScene");
         }
 
-        // scene switching / restart
+        // return to menu
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
             this.music.stop();
             this.scene.start("menuScene");
