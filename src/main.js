@@ -33,7 +33,7 @@ let config = {
             fps: 60
         }
     },
-    scene: [ Load, Menu, Scene1, Scene2, Scene3, EndScene ]
+    scene: [ Load, Menu, Scene1, Scene2, Scene3, Coffin, EndScene ]
 }
 
 // create game object

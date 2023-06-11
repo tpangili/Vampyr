@@ -30,6 +30,7 @@ class Load extends Phaser.Scene {
         this.load.tilemapTiledJSON("scene3_JSON", "img/scene3.json");
         this.load.tilemapTiledJSON("coffin_JSON", "img/coffin.json");
         // load texture atlases
+        this.load.atlas('window_atlas', 'img/window.png', 'img/window.json');
         // load audio assets
         this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');
         this.load.audio('bgm_scene1', 'audio/bgm_scene1.mp3');
