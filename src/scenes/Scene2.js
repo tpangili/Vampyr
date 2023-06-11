@@ -3,6 +3,7 @@ class Scene2 extends Phaser.Scene {
         super("secondScene");
 
         this.VEL = 145;
+        this.VAMPVEL = 100;
     }
 
     create() {
@@ -31,13 +32,15 @@ class Scene2 extends Phaser.Scene {
             rate: 1,
             detune: 0,
             seek: 0,
-            loop: true,
+            loop: false,
             delay: 0
         }
         this.music.play(musicConfig2);
 
         // controls player movement
         this.endScene = false;
+        // controls movement after convert to vampire
+        this.vampTime = false;
         
         // controls npc movement
         this.move1 = true;
@@ -48,6 +51,11 @@ class Scene2 extends Phaser.Scene {
         // create player with physics properties
         this.p1 = this.physics.add.sprite(385, 1840, 'player');
         this.p1.body.setCollideWorldBounds(true);
+
+        // create vampire object with physics properties
+        this.vamp = this.physics.add.sprite(385, 1840, 'vampire');
+        this.vamp.body.setCollideWorldBounds(true);
+        this.vamp.alpha = 0;
 
         // create sister npc with physics properties
         this.npc = this.physics.add.sprite(385, 1500, 'player');
@@ -62,12 +70,26 @@ class Scene2 extends Phaser.Scene {
 
         // set physics colliders
         this.physics.add.collider(this.p1, collisionLayer);
+        this.physics.add.collider(this.vamp, collisionLayer);
 
         // define cursor key input
         cursors = this.input.keyboard.createCursorKeys();
 
         // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');
+        // debug to go vamp
+        this.vamping = this.input.keyboard.addKey('v');
+
+        // end scene after timer expires
+        this.time.delayedCall(140000, () => { 
+            this.music.stop();
+            this.scene.start("menuScene");
+        });
+        /*
+        // activate vampire time at this cue
+        this.time.delayedCall(88000, () => { 
+            this.goVamp(this.p1);
+        });*/
 
         // debug text
         //this.debug = this.add.bitmapText(16, h-48, 'gem', '', 12);
@@ -84,6 +106,10 @@ class Scene2 extends Phaser.Scene {
         // Debug logs to see player position
         //console.log(this.p1.x);
         //console.log(this.p1.y);
+
+        if (this.vampTime) {
+            this.physics.moveTo(this.vamp, this.npc.x, this.npc.y, this.VAMPVEL);
+        }
 
         // player movement
         this.p1.body.setVelocity(0);
@@ -106,9 +132,23 @@ class Scene2 extends Phaser.Scene {
             this.music.stop();
             this.scene.start("menuScene");
         }
+        if(Phaser.Input.Keyboard.JustDown(this.vamping)) {
+            this.goVamp(this.p1);
+        }
 
         // debug text
         //this.debug.text = `CAMSCROLLX:${this.cam.scrollX.toFixed(2)}, CAMSCROLLY:${this.cam.scrollY.toFixed(2)}\nPX:${this.p1.x.toFixed(2)}, PY:${this.p1.y.toFixed(2)}`;
+    }
+
+    // changes things to handle vampire conversion
+    goVamp(obj) {
+        obj.alpha = 0;
+        this.vamp.x = obj.x;
+        this.vamp.y = obj.y;
+        this.vamp.alpha = 1;
+        // show score text
+        this.add.image(0, 0, 'vampColor').setOrigin(0, 0);
+        this.vampTime = true;
     }
 
     // check passed obj against passed camera bounds to scroll camera

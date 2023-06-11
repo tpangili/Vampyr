@@ -21,6 +21,7 @@ class Load extends Phaser.Scene {
         this.load.image('player', 'img/person.png');
         this.load.image('shadow', 'img/shadow.png');
         this.load.image('vampColor', 'img/vampColor.png');
+        this.load.image('vampire', 'img/vampire.png');
         // load tileset assets
         this.load.image('tilesetImage', 'img/vampyr atari tileset.png');   
         this.load.tilemapTiledJSON("scene1_JSON", "img/scene1.json");

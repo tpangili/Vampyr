@@ -6,7 +6,7 @@
 // - Camera
 // - Tilemaps
 // - Timer
-// - Text Object
+// - Animation Manager
 
 // more strict about accuracy
 'use strict';
