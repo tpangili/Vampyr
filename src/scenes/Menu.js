@@ -63,7 +63,8 @@ class Menu extends Phaser.Scene {
         }
         if (Phaser.Input.Keyboard.JustDown(key3)) {
             // starts scene 3
-            //this.scene.start('thirdScene'); 
+            this.music.stop();
+            this.scene.start('thirdScene'); 
         }
         if (Phaser.Input.Keyboard.JustDown(keyC)) {
             // Display credits

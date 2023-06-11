@@ -19,6 +19,7 @@ class Load extends Phaser.Scene {
         // load graphics assets
         this.load.image('title', 'img/title_screen.png');
         this.load.image('player', 'img/person.png');
+        this.load.image('player_out', 'img/person_out.png');
         this.load.image('shadow', 'img/shadow.png');
         this.load.image('vampColor', 'img/vampColor.png');
         this.load.image('vampire', 'img/vampire.png');
@@ -26,6 +27,7 @@ class Load extends Phaser.Scene {
         this.load.image('tilesetImage', 'img/vampyr atari tileset.png');   
         this.load.tilemapTiledJSON("scene1_JSON", "img/scene1.json");
         this.load.tilemapTiledJSON("scene2_JSON", "img/scene2.json");
+        this.load.tilemapTiledJSON("scene3_JSON", "img/scene3.json");
         // load texture atlases
         // load audio assets
         this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');

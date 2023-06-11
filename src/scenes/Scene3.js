@@ -1,14 +1,13 @@
-class Scene2 extends Phaser.Scene {
+class Scene3 extends Phaser.Scene {
     constructor() {
-        super("secondScene");
+        super("thirdScene");
 
         this.VEL = 145;
-        this.VAMPVEL = 80;
     }
 
     create() {
         // setup tilemap
-        const map = this.add.tilemap("scene2_JSON");
+        const map = this.add.tilemap("scene3_JSON");
         const tileset = map.addTilesetImage("vampyr atari tileset", "tilesetImage");
         const bgLayer = map.createLayer("bgLayer", tileset, 0, 0);
         const collisionLayer = map.createLayer("collisionLayer", tileset, 0, 0);
@@ -24,43 +23,32 @@ class Scene2 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
+        /*
         // background music
-        this.music = this.sound.add('bgm_scene2');
-        let musicConfig2 = {
+        this.music = this.sound.add('bgm_scene3');
+        let musicConfig = {
             mute: false,
             volume: 1,
             rate: 1,
             detune: 0,
             seek: 0,
-            loop: false,
+            loop: true,
             delay: 0
         }
-        this.music.play(musicConfig2);
+        this.music.play(musicConfig);*/
 
         // controls player movement
         this.endScene = false;
-        // controls movement after convert to vampire
-        this.vampTime = false;
         
-        // controls npc movement
-        this.move1 = true;
-        this.move2 = false;
-        this.move3 = false;
-        this.move4 = false;
-        this.move5 = false;
-        this.move6 = false;
-        
-        // create player with physics properties
-        this.p1 = this.physics.add.sprite(385, 1840, 'player');
+        // create person sprite
+        this.body = this.add.image(214, 1545, 'player_out');
+        this.npc = this.add.image(133, 771, 'player');
+
+        // create player objects with physics properties
+        this.p1 = this.physics.add.sprite(214, 1545, 'player_out');
         this.p1.body.setCollideWorldBounds(true);
-
-        // create vampire object with physics properties
-        this.vamp = this.physics.add.sprite(385, 1840, 'vampire');
-        this.vamp.body.setCollideWorldBounds(true);
-        this.vamp.alpha = 0;
-
-        // create sister npc with physics properties
-        this.npc = this.physics.add.sprite(740, 1342, 'player');
+        this.p2 = this.physics.add.sprite(1148, 785, 'player');
+        this.p2.body.setCollideWorldBounds(true);
 
         // set camera properties
         this.cam = this.cameras.main;
@@ -71,28 +59,14 @@ class Scene2 extends Phaser.Scene {
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
 
         // set physics colliders
-        this.physics.add.collider(this.p1, collisionLayer);
-        this.physics.add.collider(this.vamp, collisionLayer);
+        //this.physics.add.collider(this.p1, collisionLayer);
+        this.physics.add.collider(this.p2, collisionLayer);
+
+        // define cursor key input
+        cursors = this.input.keyboard.createCursorKeys();
 
         // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');
-        // debug to go vamp
-        //this.vamping = this.input.keyboard.addKey('V');    
-        
-        cursors = this.input.keyboard.createCursorKeys();
-        
-        // end scene after timer expires
-        this.time.delayedCall(133000, () => { 
-            this.npc.destroy();
-            this.music.stop();
-            this.scene.start("menuScene");
-        });
-
-        // activate vampire time at this cue
-        this.time.delayedCall(82000, () => { 
-            this.goVamp(this.p1);
-            this.move3 = true;
-        });
 
         // debug text
         //this.debug = this.add.bitmapText(16, h-48, 'gem', '', 12);
@@ -110,89 +84,40 @@ class Scene2 extends Phaser.Scene {
         //console.log(`X: ${this.p1.x}`);
         //console.log(`Y: ${this.p1.y}`);
 
-        // makes vampire move towards npc
-        if (this.vampTime) {
-            this.physics.moveTo(this.vamp, this.npc.x, this.npc.y, this.VAMPVEL);
-        }
-
-        // controls npc movement
-        if (this.move1) {
-            this.physics.moveTo(this.npc, 165, 1438, this.VEL);
-            if (this.npc.x <= 165) {
-                this.npc.body.setVelocity(0);
-                this.move1 = false;
-                this.move2 = true;
-            }
-        }
-        if (this.move2) {
-            this.physics.moveTo(this.npc, 203, 1784, this.VEL);
-            if (this.npc.y >= 1784) {
-                this.npc.body.setVelocity(0);
-                this.move2 = false;
-            }
-        }
-        if (this.move3) {
-            this.physics.moveTo(this.npc, 148, 1731, 15);
-            this.time.delayedCall(5000, () => { 
-                this.npc.body.setVelocity(0);
-                this.move3 = false;
-                this.move4 = true;
-            });
-        }
-        if (this.move4) {
-            this.physics.moveTo(this.npc, 206, 1578, 15);
-            if (this.npc.x >= 206 && this.npc.y <= 1578) {
-                this.npc.body.setVelocity(0);
-                this.move4 = false;
-                this.move5 = true;
-            }
-        }
-        if (this.move5) {
-            this.move5 = false;
-            this.physics.moveTo(this.npc, 800, 1354, 25);
-        }
-
         // player movement
         this.p1.body.setVelocity(0);
+        this.p2.body.setVelocity(0);
 
         if(cursors.left.isDown && !this.endScene) {
             this.p1.body.setVelocityX(-this.VEL);
+            this.p2.body.setVelocityX(-this.VEL);
         } 
         if(cursors.right.isDown && !this.endScene) {
             this.p1.body.setVelocityX(this.VEL);
+            this.p2.body.setVelocityX(this.VEL);
         } 
         if(cursors.up.isDown && !this.endScene) {
             this.p1.body.setVelocityY(-this.VEL);
+            this.p2.body.setVelocityY(-this.VEL);
         } 
         if(cursors.down.isDown && !this.endScene) {
             this.p1.body.setVelocityY(this.VEL);
+            this.p2.body.setVelocityY(this.VEL);
+        }
+
+        if (this.p1.body.x >= 2310) {
+            //this.music.stop();
+            this.scene.start("menuScene");
         }
 
         // scene switching / restart
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
-            this.music.stop();
+            //this.music.stop();
             this.scene.start("menuScene");
         }
-        /*
-        if(Phaser.Input.Keyboard.JustDown(this.vamping)) {
-            this.goVamp(this.p1);
-            this.move3 = true;
-        }*/
 
         // debug text
         //this.debug.text = `CAMSCROLLX:${this.cam.scrollX.toFixed(2)}, CAMSCROLLY:${this.cam.scrollY.toFixed(2)}\nPX:${this.p1.x.toFixed(2)}, PY:${this.p1.y.toFixed(2)}`;
-    }
-
-    // changes things to handle vampire conversion
-    goVamp(obj) {
-        obj.alpha = 0;
-        this.vamp.x = obj.x;
-        this.vamp.y = obj.y;
-        this.vamp.alpha = 1;
-        // show score text
-        this.add.image(0, 0, 'vampColor').setOrigin(0, 0);
-        this.endScene = true;
-        this.vampTime = true;
     }
 
     // check passed obj against passed camera bounds to scroll camera
