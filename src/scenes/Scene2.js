@@ -3,7 +3,7 @@ class Scene2 extends Phaser.Scene {
         super("secondScene");
 
         this.VEL = 145;
-        this.VAMPVEL = 100;
+        this.VAMPVEL = 80;
     }
 
     create() {
@@ -47,6 +47,8 @@ class Scene2 extends Phaser.Scene {
         this.move2 = false;
         this.move3 = false;
         this.move4 = false;
+        this.move5 = false;
+        this.move6 = false;
         
         // create player with physics properties
         this.p1 = this.physics.add.sprite(385, 1840, 'player');
@@ -58,7 +60,7 @@ class Scene2 extends Phaser.Scene {
         this.vamp.alpha = 0;
 
         // create sister npc with physics properties
-        this.npc = this.physics.add.sprite(385, 1500, 'player');
+        this.npc = this.physics.add.sprite(740, 1342, 'player');
 
         // set camera properties
         this.cam = this.cameras.main;
@@ -72,24 +74,24 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.collider(this.p1, collisionLayer);
         this.physics.add.collider(this.vamp, collisionLayer);
 
-        // define cursor key input
-        cursors = this.input.keyboard.createCursorKeys();
-
         // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');
         // debug to go vamp
-        this.vamping = this.input.keyboard.addKey('v');
-
+        //this.vamping = this.input.keyboard.addKey('V');    
+        
+        cursors = this.input.keyboard.createCursorKeys();
+        
         // end scene after timer expires
-        this.time.delayedCall(140000, () => { 
+        this.time.delayedCall(133000, () => { 
             this.music.stop();
             this.scene.start("menuScene");
         });
-        /*
+
         // activate vampire time at this cue
-        this.time.delayedCall(88000, () => { 
+        this.time.delayedCall(82000, () => { 
             this.goVamp(this.p1);
-        });*/
+            this.move3 = true;
+        });
 
         // debug text
         //this.debug = this.add.bitmapText(16, h-48, 'gem', '', 12);
@@ -104,11 +106,48 @@ class Scene2 extends Phaser.Scene {
         this.checkCamBounds(this.p1, this.cam);
 
         // Debug logs to see player position
-        //console.log(this.p1.x);
-        //console.log(this.p1.y);
+        //console.log(`X: ${this.p1.x}`);
+        //console.log(`Y: ${this.p1.y}`);
 
+        // makes vampire move towards npc
         if (this.vampTime) {
             this.physics.moveTo(this.vamp, this.npc.x, this.npc.y, this.VAMPVEL);
+        }
+
+        // controls npc movement
+        if (this.move1) {
+            this.physics.moveTo(this.npc, 165, 1438, this.VEL);
+            if (this.npc.x <= 165) {
+                this.npc.body.setVelocity(0);
+                this.move1 = false;
+                this.move2 = true;
+            }
+        }
+        if (this.move2) {
+            this.physics.moveTo(this.npc, 203, 1784, this.VEL);
+            if (this.npc.y >= 1784) {
+                this.npc.body.setVelocity(0);
+                this.move2 = false;
+            }
+        }
+        if (this.move3) {
+            this.physics.moveTo(this.npc, 148, 1731, 15);
+            this.time.delayedCall(5000, () => { 
+                this.npc.body.setVelocity(0);
+                this.move3 = false;
+                this.move4 = true;
+            });
+        }
+        if (this.move4) {
+            this.physics.moveTo(this.npc, 206, 1578, 15);
+            if (this.npc.x >= 206 && this.npc.y <= 1578) {
+                this.npc.body.setVelocity(0);
+                this.move4 = false;
+                this.move5 = true;
+            }
+        }
+        if (this.move5) {
+            this.physics.moveTo(this.npc, 800, 1354, 25);
         }
 
         // player movement
@@ -132,9 +171,11 @@ class Scene2 extends Phaser.Scene {
             this.music.stop();
             this.scene.start("menuScene");
         }
+        /*
         if(Phaser.Input.Keyboard.JustDown(this.vamping)) {
             this.goVamp(this.p1);
-        }
+            this.move3 = true;
+        }*/
 
         // debug text
         //this.debug.text = `CAMSCROLLX:${this.cam.scrollX.toFixed(2)}, CAMSCROLLY:${this.cam.scrollY.toFixed(2)}\nPX:${this.p1.x.toFixed(2)}, PY:${this.p1.y.toFixed(2)}`;
@@ -148,6 +189,7 @@ class Scene2 extends Phaser.Scene {
         this.vamp.alpha = 1;
         // show score text
         this.add.image(0, 0, 'vampColor').setOrigin(0, 0);
+        this.endScene = true;
         this.vampTime = true;
     }
 

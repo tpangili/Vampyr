@@ -39,7 +39,7 @@ let config = {
 // create game object
 let game = new Phaser.Game(config);
 // reserve keyboard names
-let keySpace, keyC, keyM, key1, key2, key3;
+let keyC, key1, key2, key3;
 // miscellaneous variables for future scenes
 let centerX = game.config.width/2;
 let centerY = game.config.height/2;

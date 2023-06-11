@@ -31,7 +31,6 @@ class Menu extends Phaser.Scene {
         this.add.text(centerX - 110, centerY + 315, '(C) for credits', menuConfig);
 
         // define keys
-        keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
         key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
         key3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
