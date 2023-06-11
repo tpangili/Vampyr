@@ -33,6 +33,7 @@ class Load extends Phaser.Scene {
         this.load.audio('bgm_menu', 'audio/bgm_menu.mp3');
         this.load.audio('bgm_scene1', 'audio/bgm_scene1.mp3');
         this.load.audio('bgm_scene2', 'audio/bgm_scene2.mp3');
+        this.load.audio('bgm_scene3', 'audio/bgm_scene3.mp3');
     }
 
     create() {

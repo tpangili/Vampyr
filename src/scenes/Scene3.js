@@ -23,7 +23,6 @@ class Scene3 extends Phaser.Scene {
         //     //faceColor: new Phaser.Display.Color(40, 40, 40, 255)
         // });
 
-        /*
         // background music
         this.music = this.sound.add('bgm_scene3');
         let musicConfig = {
@@ -35,7 +34,7 @@ class Scene3 extends Phaser.Scene {
             loop: true,
             delay: 0
         }
-        this.music.play(musicConfig);*/
+        this.music.play(musicConfig);
 
         // controls player movement
         this.endScene = false;
@@ -59,7 +58,7 @@ class Scene3 extends Phaser.Scene {
         this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
 
         // set physics colliders
-        //this.physics.add.collider(this.p1, collisionLayer);
+        this.physics.add.collider(this.p1, collisionLayer);
         this.physics.add.collider(this.p2, collisionLayer);
 
         // define cursor key input
@@ -106,13 +105,13 @@ class Scene3 extends Phaser.Scene {
         }
 
         if (this.p1.body.x >= 2310) {
-            //this.music.stop();
+            this.music.stop();
             this.scene.start("menuScene");
         }
 
         // scene switching / restart
         if(Phaser.Input.Keyboard.JustDown(this.reload)) {
-            //this.music.stop();
+            this.music.stop();
             this.scene.start("menuScene");
         }
 
