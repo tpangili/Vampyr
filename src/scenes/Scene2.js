@@ -82,14 +82,14 @@ class Scene2 extends Phaser.Scene {
         cursors = this.input.keyboard.createCursorKeys();
         
         // end scene after timer expires
-        this.time.delayedCall(133000, () => { 
+        this.time.delayedCall(95000, () => { 
             this.npc.destroy();
             this.music.stop();
             this.scene.start("menuScene");
         });
 
         // activate vampire time at this cue
-        this.time.delayedCall(82000, () => { 
+        this.time.delayedCall(48000, () => { 
             this.goVamp(this.p1);
             this.move3 = true;
         });
