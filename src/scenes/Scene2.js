@@ -8,13 +8,13 @@ class Scene2 extends Phaser.Scene {
 
     create() {
         // setup tilemap
-        const map = this.add.tilemap("scene2_JSON");
-        const tileset = map.addTilesetImage("vampyr atari tileset", "tilesetImage");
-        const bgLayer = map.createLayer("bgLayer", tileset, 0, 0);
-        const collisionLayer = map.createLayer("collisionLayer", tileset, 0, 0);
+        this.map = this.add.tilemap("scene2_JSON");
+        this.tileset = this.map.addTilesetImage("vampyr atari tileset", "tilesetImage");
+        this.bgLayer = this.map.createLayer("bgLayer", this.tileset, 0, 0);
+        this.collisionLayer = this.map.createLayer("collisionLayer", this.tileset, 0, 0);
 
         // set map collision
-        collisionLayer.setCollisionByProperty({ collides: true });
+        this.collisionLayer.setCollisionByProperty({ collides: true });
 
         // tilemap collision debug
         const debugGraphics = this.add.graphics().setAlpha(0.75);
@@ -64,15 +64,15 @@ class Scene2 extends Phaser.Scene {
 
         // set camera properties
         this.cam = this.cameras.main;
-        this.cam.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cam.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cam.centerOn(this.p1.x, this.p1.y);
         
         // set physics bounds
-        this.physics.world.bounds.setTo(0, 0, map.widthInPixels, map.heightInPixels);
+        this.physics.world.bounds.setTo(0, 0, this.map.widthInPixels, this.map.heightInPixels);
 
         // set physics colliders
-        this.physics.add.collider(this.p1, collisionLayer);
-        this.physics.add.collider(this.vamp, collisionLayer);
+        this.physics.add.collider(this.p1, this.collisionLayer);
+        this.physics.add.collider(this.vamp, this.collisionLayer);
 
         // enable return to menu key
         this.reload = this.input.keyboard.addKey('R');

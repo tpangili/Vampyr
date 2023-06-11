@@ -1,13 +1,13 @@
-class Scene3 extends Phaser.Scene {
+class EndScene extends Phaser.Scene {
     constructor() {
-        super("thirdScene");
+        super("endScene");
 
         this.VEL = 145;
     }
 
     create() {
         // setup tilemap
-        this.map = this.add.tilemap("scene3_JSON");
+        this.map = this.add.tilemap("scene1_JSON");
         this.tileset = this.map.addTilesetImage("vampyr atari tileset", "tilesetImage");
         this.bgLayer = this.map.createLayer("bgLayer", this.tileset, 0, 0);
         this.collisionLayer = this.map.createLayer("collisionLayer", this.tileset, 0, 0);
@@ -38,16 +38,10 @@ class Scene3 extends Phaser.Scene {
 
         // controls player movement
         this.endScene = false;
-        
-        // create person sprite
-        this.body = this.add.image(214, 1545, 'player_out');
-        this.npc = this.add.image(133, 771, 'player');
 
         // create player objects with physics properties
-        this.p1 = this.physics.add.sprite(214, 1545, 'player_out');
+        this.p1 = this.physics.add.sprite(214, 2808, 'player');
         this.p1.body.setCollideWorldBounds(true);
-        this.p2 = this.physics.add.sprite(1148, 785, 'player');
-        this.p2.body.setCollideWorldBounds(true);
 
         // set camera properties
         this.cam = this.cameras.main;
@@ -59,7 +53,6 @@ class Scene3 extends Phaser.Scene {
 
         // set physics colliders
         this.physics.add.collider(this.p1, this.collisionLayer);
-        this.physics.add.collider(this.p2, this.collisionLayer);
 
         // define cursor key input
         cursors = this.input.keyboard.createCursorKeys();
@@ -85,28 +78,23 @@ class Scene3 extends Phaser.Scene {
 
         // player movement
         this.p1.body.setVelocity(0);
-        this.p2.body.setVelocity(0);
 
         if(cursors.left.isDown && !this.endScene) {
             this.p1.body.setVelocityX(-this.VEL);
-            this.p2.body.setVelocityX(-this.VEL);
         } 
         if(cursors.right.isDown && !this.endScene) {
             this.p1.body.setVelocityX(this.VEL);
-            this.p2.body.setVelocityX(this.VEL);
         } 
         if(cursors.up.isDown && !this.endScene) {
             this.p1.body.setVelocityY(-this.VEL);
-            this.p2.body.setVelocityY(-this.VEL);
         } 
         if(cursors.down.isDown && !this.endScene) {
             this.p1.body.setVelocityY(this.VEL);
-            this.p2.body.setVelocityY(this.VEL);
         }
 
-        if (this.p1.body.x >= 2310) {
+        if (this.p1.body.y <= 2449) {
             this.music.stop();
-            this.scene.start("endScene");
+            this.scene.start("menuScene");
         }
 
         // scene switching / restart
