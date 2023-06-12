@@ -24,7 +24,7 @@ class EndScene extends Phaser.Scene {
         // });
 
         // background music
-        this.music = this.sound.add('bgm_scene3');
+        this.music = this.sound.add('bgm_end');
         let musicConfig = {
             mute: false,
             volume: 1,

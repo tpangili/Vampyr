@@ -38,14 +38,14 @@ class Coffin extends Phaser.Scene {
         // });
 
         // background music
-        this.music = this.sound.add('bgm_scene3');
+        this.music = this.sound.add('bgm_coffin');
         let musicConfig = {
             mute: false,
             volume: 1,
             rate: 1,
             detune: 0,
             seek: 0,
-            loop: true,
+            loop: false,
             delay: 0
         }
         this.music.play(musicConfig);
